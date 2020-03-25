@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weight Converter</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+        body {
+            background-color: #0E1C36;
+        }
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h1 class="display-4 text-center text-white mt-5 mb-5">Weight Converter</h1>
+          <div class="form-group">
+            <!-- SELECT FORM-->
+            <select id="selectBox" class="form-control-lg">
+              <option value="grams" id="optionGms">Gram</option>
+              <option value="kilograms" id="optionKgs">Kilogram</option>
+            </select>
+          </div>
+          <form>
+            <div class="form-group">
+              <input
+                id="gmsInput"
+                type="number"
+                class="form-control-lg form-control"
+                placeholder="Enter in Gram..."
+                onblur="blurOut()"
+                ;
+              />
+              <input
+                id="kgsInput"
+                type="number"
+                class="form-control-lg form-control"
+                placeholder="Enter in Kilogram..."
+                onblur="blurOut()"
+                ;
+              />
+            </div>
+          </form>
+          <div id="output-for-grams">
+            <div class="card bg-success mb-2">
+              <div class="card-body">
+                <h4>Kilogram</h4>
+                <div id="kgOutput"></div>
+              </div>
+            </div>
+
+            <div class="card bg-primary mb-2">
+              <div class="card-body">
+                <h4>Pound</h4>
+                <div id="lbsOutput"></div>
+              </div>
+            </div>
+
+            <div class="card bg-danger mb-2">
+              <div class="card-body">
+                <h4>Ounce</h4>
+                <div id="ozOutput"></div>
+              </div>
+            </div>
+          </div>
+          <div id="output-for-kilograms">
+            <div class="card bg-primary mb-2">
+              <div class="card-body">
+                <h4>Gram</h4>
+                <div id="grams2Output"></div>
+              </div>
+            </div>
+
+            <div class="card bg-success mb-2">
+              <div class="card-body">
+                <h4>Pound</h4>
+                <div id="lbs2Output"></div>
+              </div>
+            </div>
+
+            <div class="card bg-danger mb-2">
+              <div class="card-body">
+                <h4>Ounce</h4>
+                <div id="oz2Output"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var selectBox = document.getElementById("selectBox");
+      selectBox.addEventListener("change", selectItem);
+
+      document.getElementById("kgsInput").style.display = "none";
+
+      document.getElementById("output-for-grams").style.display = "none";
+      document.getElementById("output-for-kilograms").style.display = "none";
+
+      function selectItem(e) {
+        if (selectBox.value == "grams") {
+          document.getElementById("gmsInput").style.display = "block";
+          document.getElementById("kgsInput").style.display = "none";
+        }
+        if (selectBox.value == "kilograms") {
+          document.getElementById("kgsInput").style.display = "block";
+          document.getElementById("gmsInput").style.display = "none";
+        }
+      }
+
+      var inputgrams = document.getElementById("gmsInput");
+      var inputKilograms = document.getElementById("kgsInput");
+
+      inputgrams.addEventListener("input", convertgrams);
+      inputKilograms.addEventListener("input", convertKilograms);
+
+      function blurOut() {
+        inputgrams.value = "";
+        inputKilograms.value = "";
+        document.getElementById("output-for-grams").style.display = "none";
+        document.getElementById("output-for-kilograms").style.display = "none";
+      }
+
+      function convertgrams(e) {
+        document.getElementById("output-for-grams").style.display = "block";
+        let gms = e.target.value;
+        document.getElementById("kgOutput").innerHTML = (gms / 1000).toFixed(3);
+        document.getElementById("lbsOutput").innerHTML = (gms / 454).toFixed(3);
+        document.getElementById("ozOutput").innerHTML = (gms / 28.35).toFixed(3);
+      }
+
+      function convertKilograms(e) {
+        document.getElementById("output-for-kilograms").style.display = "block";
+        let kgs = e.target.value;
+        document.getElementById("grams2Output").innerHTML = (kgs * 1000).toFixed(3);
+        document.getElementById("lbs2Output").innerHTML = (kgs * 2.205).toFixed(3);
+        document.getElementById("oz2Output").innerHTML = (kgs * 35.274).toFixed(3);
+      }
+    </script>
+  </body>
+</html>
